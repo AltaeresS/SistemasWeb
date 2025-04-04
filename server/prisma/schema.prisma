@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  id         Int      @id @default(autoincrement())
+  nome       String
+  email      String   @unique
+  senha      String
+  
+  contato    String
+  categoria  Categoria
+  reservas   Reserva[]
+
+  @@map("usuario")
+}
+
+enum Categoria {
+  MEMBRO
+  VISITANTE
+}
+
+model Quadra {
+  id        Int      @id @default(autoincrement())
+  nome      String   @unique 
+  reservas  Reserva[]
+
+  // O nome dado a tabela sera:
+  @@map("quadra")
+}
+
+model Reserva {
+  id         Int      @id @default(autoincrement())
+  usuarioId  Int
+  quadraId   Int
+  dataHora   DateTime
+  usuario    Usuario  @relation(fields: [usuarioId], references: [id])
+  quadra     Quadra   @relation(fields: [quadraId], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([quadraId, dataHora]) // Garante que não haja reservas duplicadas para a mesma quadra e horário
+
+  // O nome dado a tabela sera:
+  @@map("reserva")
+}

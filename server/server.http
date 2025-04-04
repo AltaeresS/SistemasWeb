@@ -1,0 +1,68 @@
+GET http://localhost:5000/usuarios
+
+###
+
+POST http://localhost:5000/usuarios
+Content-Type: application/json
+
+{
+    "nome": "Test",
+    "email": "Test@teste.com",
+    "senha": "test",
+    "contato": "(00) 00000-0000",
+    "categoria": "MEMBRO"
+}
+
+###
+
+POST http://localhost:5000/usuarios/1/reservas
+Content-Type: application/json
+
+{
+    "quadraId": 2,
+    "dataHora": "2025-04-10T17:00:00Z"
+}
+
+###
+
+GET http://localhost:5000/usuarios/1/reservas
+
+###
+
+PUT http://localhost:5000/usuarios/1/reservas/3
+Content-Type: application/json
+
+{
+    "quadraId": 2,
+    "dataHora": "2025-04-10T16:00:00Z"
+}
+
+###
+
+DELETE http://localhost:5000/usuarios/1/reservas/4
+
+###
+
+Get http://localhost:5000/quadras
+
+###
+
+POST http://localhost:5000/quadras
+Content-Type: application/json
+
+{
+    "nome": "Tênis_02"
+}
+
+###
+
+PUT http://localhost:5000/quadras/3
+Content-Type: application/json
+
+{
+    "nome": "Tênis_02" 
+}
+
+###
+
+DELETE  http://localhost:5000/quadras/7
